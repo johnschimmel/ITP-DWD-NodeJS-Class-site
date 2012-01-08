@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 var hogan=require('hogan.js'),
-	adapter=require('hogan-express.js');
+	adapter=require('./hogan-express.js');
 
 require('./models.js').buildModels(Schema, mongoose);
 var Post = mongoose.model('BlogPost');
