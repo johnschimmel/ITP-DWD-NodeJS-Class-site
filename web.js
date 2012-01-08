@@ -25,22 +25,26 @@ app.get('/', function(request, response) {
       // internally
 
       for (n in docs) {
-          console.log(docs[n].title);
-          
+          //console.log(docs[n].title);
       }
     });
     
-    response.render("index",{title:"Hello World"});
+    
+    response.render("index.html",{
+        title:"Hello World"
+    });
 
 });
 
 app.configure('development','production', function(){
-    app.use(express.static(__dirname + '/public'));
+
+    app.use(express.static(__dirname + '/public')); // all static files (css, js, and IMGs) go in here
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-    app.set('view engine','hogan.js');
-    app.set('view options',{layout:false});
-    app.set('views',__dirname+ '/views');
-    app.register('hogan.js',adapter.init(hogan));
+    app.set('view engine','hogan.js'); // use Hogan.js as template engine
+    app.set('view options',{layout:true}); // use layout.html w/ {{{body}}}
+    app.set('views',__dirname+ '/views'); // use /views as template directory
+    app.register('html',adapter.init(hogan)); //use .html files in /views
+    
 });
 
 var port = process.env.PORT || 3000;
