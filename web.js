@@ -29,20 +29,38 @@ app.get('/', function(request, response) {
       }
     });
     
+    var template = hogan.compile("@{{name}}");
+
+    var team = ['dhg', 'fat', 'jimio', 'nickgreen', 'sayrer'];
+
+    team.map(function (twitterer) {
+
+      // Render context to template
+      return template.render({name: twitterer });
+
+    });
+
+    // outputs "Follow: @dhg @fat @jimio @nickgreen @sayrer!"
+    console.log('Follow: ' + team.join(' ') + '!');
+    
     
     response.render("index.html",{
-        title:"Hello World"
+        title:"Hello World",
+        sidebar: 'Follow: ' + team.join(' ') + '!'
     });
 
 });
+
 
 app.configure('development','production', function(){
 
     app.use(express.static(__dirname + '/public')); // all static files (css, js, and IMGs) go in here
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-    app.set('view engine','hogan.js'); // use Hogan.js as template engine
-    app.set('view options',{layout:true}); // use layout.html w/ {{{body}}}
+    
+    // use Hogan.js as template engine. Info http://allampersandall.blogspot.com/2011/12/hoganjs-expressjs-nodejs.html
+    app.set('view engine','hogan.js'); 
     app.set('views',__dirname+ '/views'); // use /views as template directory
+    app.set('view options',{layout:true}); // use layout.html w/ {{{body}}}
     app.register('html',adapter.init(hogan)); //use .html files in /views
     
 });
