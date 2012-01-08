@@ -2,6 +2,8 @@ var express = require('express');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
+var hogan=require('hogan.js'),
+	adapter=require('hogan-express.js');
 
 require('./models.js').buildModels(Schema, mongoose);
 var Post = mongoose.model('BlogPost');
@@ -28,19 +30,17 @@ app.get('/', function(request, response) {
       }
     });
     
-    response.send('Hello World!!!');
+    response.render("index",{title:"Hello World"});
 
 });
 
-app.configure('development', function(){
+app.configure('development','production', function(){
     app.use(express.static(__dirname + '/public'));
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
-
-app.configure('production', function(){
-  var oneYear = 31557600000;
-  app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
-  app.use(express.errorHandler());
+    app.set('view engine','hogan.js');
+    app.set('view options',{layout:false});
+    app.set('views',__dirname+ '/views');
+    app.register('hogan.js',adapter.init(hogan));
 });
 
 var port = process.env.PORT || 3000;

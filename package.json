@@ -4,6 +4,7 @@
   "dependencies": {
     "mongodb": "0.9.7",
     "express": "2.5.1",
-    "mongoose": "2.4.1"
+    "mongoose": "2.4.1",
+    "hogan.js": "1.0.4-dev"
   }
 }
