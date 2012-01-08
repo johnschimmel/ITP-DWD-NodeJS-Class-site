@@ -1,0 +1,9 @@
+{
+  "name": "itpwebclass",
+  "version": "0.0.1",
+  "dependencies": {
+    "mongodb": "0.9.7",
+    "express": "2.5.1",
+    "mongoose": "2.4.1"
+  }
+}
