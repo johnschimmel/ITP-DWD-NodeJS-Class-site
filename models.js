@@ -21,6 +21,21 @@ function buildModels(Schema, mongoose) {
     });
     
     mongoose.model('BlogPost',BlogPost);
+    
+    
+    var ClassNote = new Schema({
+        classdate   : Date,
+        urltitle    : String,
+        title       : String,
+        intro       : String,
+        notes       : String,
+        assignment  : String,
+        publishedstatus: String,
+        lastupdated : Date
+    });
+    
+    mongoose.model('ClassNote',ClassNote);
+    
 }
 
 module.exports.buildModels = buildModels;
