@@ -25,7 +25,6 @@ app.configure( function(){
     app.use(express.static(__dirname + '/public'));
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
     
-    app.use(app.router);
 });
 
 app.get("/",function(request, response){
@@ -34,32 +33,7 @@ app.get("/",function(request, response){
 
 
 /*************** ADMIN HANDLERS *************************/
-app.post('/tehSystem/classnotes/entry', function(request, response) {
 
-    var data = {};
-
-    if (request.body != undefined) {
-        
-        var newEntry = new ClassNote();
-        newEntry.title = request.body.entry.title;
-        newEntry.urltitle = request.body.entry.urltitle;
-        //newEntry.classdate = request.body.entry.classdate;
-        newEntry.intro = request.body.entry.intro;
-        newEntry.notes = request.body.entry.notes;
-        newEntry.assignment = request.body.entry.assignment;
-        newEntry.publishstatus = request.body.entry.publishstatus;
-
-        newEntry.save();
-        
-        for(n in request.body.entry) {
-            data[n] = request.body.entry[n];
-        }
-        console.log(data);
-    }
-    
-
-    response.send("ok");
-});
 
 app.get('/query', function(request, response) {
     
