@@ -21,8 +21,7 @@ function buildModels(Schema, mongoose) {
     });
     
     mongoose.model('BlogPost',BlogPost);
-    
-    
+
     var ClassNote = new Schema({
         classdate   : Date,
         urltitle    : String,
@@ -35,6 +34,7 @@ function buildModels(Schema, mongoose) {
     });
     
     mongoose.model('ClassNote',ClassNote);
+
     
 }
 
