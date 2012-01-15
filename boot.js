@@ -5,7 +5,7 @@
 var vm = require('vm'),
     fs = require('fs');
 
-module.exports = function(app, db) {
+module.exports = function(app, mongoose) {
   var dir = __dirname + '/routes';
   // grab a list of our route files
   fs.readdirSync(dir).forEach(function(file) {
@@ -16,7 +16,7 @@ module.exports = function(app, db) {
     // internals use similar, so dont be afraid of "boot time".
     var context = {
       app: app,
-      db: db
+      mongoose: mongoose
     };
     // we have to merge the globals for console, process etc
     for (var key in global) context[key] = global[key];

@@ -1,3 +1,9 @@
+var ClassNote = mongoose.model('ClassNote');
+var Post = mongoose.model('BlogPost');
+
+console.log("in route file");
+console.log(mongoose.models);
+
 /*************** ADMIN HANDLERS *************************/
 app.get('/tehSystem', function(request, response) {
     response.render("admin/index.html",{layout:'layouts/adminLayout'});
@@ -18,7 +24,6 @@ app.post('/tehSystem/classnotes/entry', function(request, response) {
     var data = {};
 
     if (request.body != undefined) {
-        
         var newEntry = new ClassNote();
         newEntry.title = request.body.entry.title;
         newEntry.urltitle = request.body.entry.urltitle;
