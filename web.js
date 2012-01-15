@@ -53,8 +53,8 @@ app.get('/query', function(request, response) {
     });
 });
 
-require('./models.js').buildModels(Schema, mongoose);
-require("./boot.js")(app, mongoose);
+require('./models').buildModels(Schema, mongoose);
+require("./boot")(app, mongoose);
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
