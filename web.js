@@ -9,42 +9,31 @@ require('./models.js').buildModels(Schema, mongoose);
 var Post = mongoose.model('BlogPost');
 var ClassNote = mongoose.model('ClassNote');
 
-var app = express.createServer(express.logger());
+var app = express.createServer();
 app.configure( function(){
     app.db = mongoose.connect('mongodb://heroku_app2392187:tcmrbi5pr5a3pqdp7193jo1035@dbh70.mongolab.com:27707/heroku_app2392187');
     app.use(express.bodyParser());
+    app.use(express.logger());
     
-    app.use(express.static(__dirname + '/public')); // all static files (css, js, and IMGs) go in here
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
     
     // use Hogan.js as template engine. Info http://allampersandall.blogspot.com/2011/12/hoganjs-expressjs-nodejs.html
     app.set('view engine','hogan.js'); 
     app.set('views',__dirname+ '/views'); // use /views as template directory
     app.set('view options',{layout:true}); // use layout.html w/ {{{body}}}
     app.register('html',adapter.init(hogan)); //use .html files in /views
+
+    app.use(express.static(__dirname + '/public'));
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
     
+    app.use(app.router);
 });
 
-require('./routes');
+app.get("/",function(request, response){
+    response.render("index.html")
+});
+
 
 /*************** ADMIN HANDLERS *************************/
-app.get('/tehSystem', function(request, response) {
-    response.render("admin/index.html",{layout:'layouts/adminLayout'});
-});
-
-app.get('/tehSystem/classnotes/entry', function(request, response) {
-
-    response.render("admin/classNotesEntry.html",{
-        publishStatus:function(char) {
-            return "selected=selected";
-        },
-        layout:'layouts/adminLayout'
-    });
-});
-
-
-
-
 app.post('/tehSystem/classnotes/entry', function(request, response) {
 
     var data = {};
@@ -90,25 +79,9 @@ app.get('/query', function(request, response) {
     });
 });
 
-app.get("/home",function(request,response) {
-    console.log("in /home route");
-    
-    response.render("index.html",{
-        title:"Hello World",
-        sidebar : "the sidebar",
-    });
 
-});
+require("./boot.js")(app);
 
-app.get("/",function(request,response) {
-    console.log("in / route");
-    
-    response.render("index.html",{
-        title:"Hello World",
-        sidebar : "the sidebar",
-    });
-    
-});
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
