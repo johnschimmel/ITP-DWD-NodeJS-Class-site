@@ -31,7 +31,11 @@ app.get("/",function(request, response){
     response.render("index.html")
 });
 
-
+app.get('/test2',function(req,res){
+    console.log("ok ok ok");
+    res.send("go");
+    
+});
 /*************** ADMIN HANDLERS *************************/
 
 
