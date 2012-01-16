@@ -14,7 +14,6 @@ app.get('/tehSystem', function(request, response) {
                 return moment(tmpDate).format("dddd, MMMM Do YYYY");
             };
         }
-        console.log("- - - - - - - - - -- ");
         
         response.render("admin/index.html",{
             classNotes : docs,
@@ -61,14 +60,17 @@ app.post('/tehSystem/classnotes/entry', function(request, response) {
 });
 
 app.get('/tehSystem/classnotes/edit/:urltitle', function(request, response) {
+    moment = app.moment;
     
     //get class notes
     ClassNote.findOne({urltitle:request.params.urltitle},function(err,doc){
+        doc.formattedDate = function() {
+            tmpDate = moment(doc.classdate).add('minutes',moment().zone());
+            return moment(tmpDate).format("YYYY-MM-DD");
+        };
         response.render("admin/updateEntry.html",{
+            
             classnote : doc,
-            publishStatus:function(char) {
-                return "selected=selected";
-            },
             layout:'layouts/adminLayout'
         });
     });
