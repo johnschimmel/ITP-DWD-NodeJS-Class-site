@@ -8,7 +8,10 @@ console.log("-------------------");
 /*************** ADMIN HANDLERS *************************/
 app.get('/tehSystem', function(request, response) {
     moment = app.moment;
-    ClassNote.find({}, function(err,docs){
+    var query = ClassNote.find({});
+    query.sort('classdate',1);
+    
+    query.exec({}, function(err,docs){
         for (n in docs) {
             
             docs[n].formattedDate = function() {
