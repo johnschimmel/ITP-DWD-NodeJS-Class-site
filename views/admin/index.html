@@ -1,1 +1,9 @@
-<h1>Admin</h1>
+<h1>Class notes</h1>
+<ul>
+    {{#classNotes}}
+    <li>
+        <a href="/tehSystem/classnotes/edit/{{urltitle}}"> {{title}}</a>
+        {{formattedDate}}
+    </li>
+    {{/classNotes}}
+</ul>

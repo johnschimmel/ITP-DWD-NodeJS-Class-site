@@ -24,13 +24,14 @@ function buildModels(Schema, mongoose) {
 
     var ClassNote = new Schema({
         classdate   : Date,
-        urltitle    : String,
+        urltitle    : { type: String, lowercase: true, unique: true },
         title       : String,
         intro       : String,
         notes       : String,
+        notesReady  : String,
         assignment  : String,
         publishedstatus: String,
-        lastupdated : Date
+        lastupdated : { type: Date, default: Date.now }
     });
     
     mongoose.model('ClassNote',ClassNote);

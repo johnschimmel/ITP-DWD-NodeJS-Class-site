@@ -3,6 +3,7 @@ var express = require('express')
   , Schema = mongoose.Schema
   , ObjectId = Schema.ObjectId
   , hogan=require('hogan.js')
+  , moment=require("moment")
   , adapter=require('./hogan-express.js');
 
 //var dbModels = [];
@@ -11,7 +12,7 @@ var express = require('express')
 
 var app = express.createServer();
 app.configure( function(){
-    
+    app.moment = moment;
     app.db = mongoose.connect('mongodb://heroku_app2392187:tcmrbi5pr5a3pqdp7193jo1035@dbh70.mongolab.com:27707/heroku_app2392187');
     app.use(express.bodyParser());
     app.use(express.logger());
@@ -31,12 +32,6 @@ app.get("/",function(request, response){
     response.render("index.html")
 });
 
-app.get('/test2',function(req,res){
-    console.log("ok ok ok");
-    res.send("go");
-    
-});
-/*************** ADMIN HANDLERS *************************/
 
 
 app.get('/query', function(request, response) {
