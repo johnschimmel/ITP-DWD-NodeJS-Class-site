@@ -1,18 +1,23 @@
 var ClassNote = mongoose.model('ClassNote');
 var Post = mongoose.model('BlogPost');
 
-console.log("in route file");
+console.log("Available models...");
 console.log(mongoose.models);
+console.log("-------------------");
 
 /*************** ADMIN HANDLERS *************************/
 app.get('/tehSystem', function(request, response) {
     moment = app.moment;
     ClassNote.find({}, function(err,docs){
         for (n in docs) {
-            tmpDate = moment(docs[n].classdate).add('minutes',moment().zone());
+            
             docs[n].formattedDate = function() {
+                var tmpDate = moment(this.classdate).add('minutes',moment().zone());
+                console.log(tmpDate);
+                console.log("- - - - - -  -");
                 return moment(tmpDate).format("dddd, MMMM Do YYYY");
             };
+            console.log(docs[n]);
         }
         
         response.render("admin/index.html",{
@@ -64,8 +69,9 @@ app.get('/tehSystem/classnotes/edit/:urltitle', function(request, response) {
     
     //get class notes
     ClassNote.findOne({urltitle:request.params.urltitle},function(err,doc){
+        //mustache function for formatting date
         doc.formattedDate = function() {
-            tmpDate = moment(doc.classdate).add('minutes',moment().zone());
+            tmpDate = moment(this.classdate).add('minutes',moment().zone());
             return moment(tmpDate).format("YYYY-MM-DD");
         };
         response.render("admin/updateEntry.html",{
