@@ -20,7 +20,7 @@ app.get('/tehSystem', function(request, response) {
                 console.log("- - - - - -  -");
                 return moment(tmpDate).format("dddd, MMMM Do YYYY");
             };
-            console.log(docs[n]);
+            //console.log(docs[n]);
         }
         
         response.render("admin/index.html",{

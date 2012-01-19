@@ -1,0 +1,7 @@
+ul#schedule { margin-left: 0;}
+ul#schedule li { 
+    list-style-type: none; 
+    margin-bottom:18px;
+}
+
+ul#schedule li strong { color: #333;}

@@ -6,9 +6,6 @@ var express = require('express')
   , moment=require("moment")
   , adapter=require('./hogan-express.js');
 
-//var dbModels = [];
-//dbModels['Post'] = mongoose.model('BlogPost');
-//dbModels['ClassNote'] = mongoose.model('ClassNote');
 
 var app = express.createServer();
 app.configure( function(){
@@ -28,8 +25,28 @@ app.configure( function(){
     
 });
 
+
+
 app.get("/",function(request, response){
-    response.render("index.html")
+    var query = ClassNote.find({});
+    query.sort('classdate',1);
+    
+    query.exec({}, function(err,docs){
+        for (n in docs) {
+            docs[n].hasNotes = (docs[n].notes == "") ? false : true;
+            docs[n].formattedDate = function() {
+                var tmpDate = moment(this.classdate).add('minutes',moment().zone());
+                return moment(tmpDate).format("MMM Do");
+            };
+        }
+        
+        response.render("index.html",{
+            classNotes : docs
+        });
+
+    });
+    
+    //response.render("index.html")
 });
 
 
@@ -54,6 +71,10 @@ app.get('/query', function(request, response) {
 
 require('./models').buildModels(Schema, mongoose);
 require("./boot")(app, mongoose);
+
+//Models
+var ClassNote = mongoose.model('ClassNote');
+
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
