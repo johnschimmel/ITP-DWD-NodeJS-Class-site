@@ -64,6 +64,7 @@ app.get('/notes/:urltitle', function(request, response) {
         };
 
         response.render("notes.html",{
+            title : "DWD: " + doc.title,
             note : doc, //the requested doc
             layout:'layouts/notesLayout'
         });
