@@ -40,7 +40,7 @@
             <a class="brand" href="#">ITP Web Class</a>
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
-            </ul>
+          </ul>
           </div>
         </div>
       </div>
@@ -48,19 +48,10 @@
   <div role="main" style="margin-top:50px;" class="container-fluid">
       <div class="sidebar">
           <div class="well">
-            <h5 id="scheduleList_label">Schedule</h5>
-            <ul id="schedule">
-
-                {{#classNotes}}
-                <li>
-                    <span class="date">{{formattedDate}}</span><br>
-                    <strong>{{title}}</strong>
-                    {{#hasNotes}}
-                    <br/>
-                    <a class="notes" href="/notes/{{urltitle}}">View notes</a>
-                    {{/hasNotes}}
-                </li>
-                {{/classNotes}}
+            <h5 id=""><a href="../">Back</a></h5>
+            <ul id="">
+                <li><a href="#notes">Notes</a></li>
+                <li><a href="#assignment">Assignment</a></li>
             </ul>
           </div>
 

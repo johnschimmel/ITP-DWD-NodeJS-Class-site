@@ -33,13 +33,14 @@ app.get("/",function(request, response){
     
     query.exec({}, function(err,docs){
         for (n in docs) {
+            docs[n].hasAssignment = (docs[n].assignment == "") ? false : true;
             docs[n].hasNotes = (docs[n].notes == "") ? false : true;
             docs[n].formattedDate = function() {
                 var tmpDate = moment(this.classdate).add('minutes',moment().zone());
                 return moment(tmpDate).format("MMM Do");
             };
         }
-        
+
         response.render("index.html",{
             classNotes : docs
         });
@@ -49,25 +50,29 @@ app.get("/",function(request, response){
     //response.render("index.html")
 });
 
+app.get('/notes/:urltitle', function(request, response) {
 
+    //get class notes
+    ClassNote.findOne({urltitle:request.params.urltitle},function(err,doc){
+        
+        //mustache function for formatting date
+        doc.hasAssignment = (doc.assignment == "") ? false : true;
+        doc.hasNotes = (doc.notes == "") ? false : true;
+        doc.formattedDate = function() {
+            var tmpDate = moment(this.classdate).add('minutes',moment().zone());
+            return moment(tmpDate).format("MMM Do");
+        };
 
-app.get('/query', function(request, response) {
+        response.render("notes.html",{
+            note : doc, //the requested doc
+            layout:'layouts/notesLayout'
+        });
+        
+    }); 
+
     
-    //var newPost = new Post();
-    //newPost.title = "testing abc abc";
-    //newPost.comments.push({title:'TEST comment'});
-    //newPost.save();
-
-    var query = models.Post.find({});
-    query.exec(function (err, docs) {
-      // called when the `query.complete` or `query.error` are called
-      // internally
-
-      for (n in docs) {
-          //console.log(docs[n].title);
-      }
-    });
 });
+
 
 require('./models').buildModels(Schema, mongoose);
 require("./boot")(app, mongoose);

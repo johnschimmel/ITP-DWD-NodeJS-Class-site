@@ -1,53 +1,54 @@
   <div class="content">
     <!-- Main hero unit for a primary marketing message or call to action -->
     <div class="hero-unit">
-      <h1>Hello, world!</h1>
-      <p>Vestibulum id ligula porta felis euismod semper. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-      <p><a class="btn primary large">Learn more &raquo;</a></p>
+      <h2>Dynamic Web Development</h2>
+      <p><a href="http://itp.nyu.edu">Interactive Telecommunications Program</a></p>
+      <p>Spring 2012 with John Schimmel</p>
+      <p>Tuesdays, 12:30 - 3:00PM</p.>
     </div>
 
     <!-- Example row of columns -->
     <div class="row">
-      <div class="span6">
-        <h2>Heading</h2>
-        <p>Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
-      </div>
-      <div class="span5">
-        <h2>Heading</h2>
-         <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
-     </div>
-      <div class="span5">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
-      </div>
-    </div>
+      <div class="span12">
+        <section id="description">
+            <h2>Description</h2>
+            <p>If you ever had a need to collect information from users on the web or use external data in your project, understanding web development will make your life much easier.</p>
+            <p>The class will cover server-side and client-side web development topics using JavaScript. On the client-side, we will cover traditional JavaScript and the jQuery library to manipulate browser content, create and trigger page events and make AJAX data requests. Developing with NodeJS on the server-side, we will explore receiving input from a user then querying and saving that data to a database, and finally, returning the appropriate content to the client, i.e. HTML or JSON. The websites we use today are rarely on a single database, we will focus on consuming data APIs from websites like Foursquare (for location information), Facebook (for social graph) and Twilio (for SMS and telephony). Going further, we will create custom data APIs for use at ITP and open to the public.</p>
+            <p>Students must have prior HTML & CSS experience or be willing to learn it outside of class. Introduction to Computational Media or prior object oriented programming knowledge is required.</p>
+        </section>
+        
+        <section id="requirements">
+            <h2>Requirements</h2>
+            <p>It is expected that all </p>
+        </section>
+        
+        <section id="syllabus">
+            <h2>Syllabus</h2>
+            {{#classNotes}}
+            <div class="classEntry">
+                <h3>{{formattedDate}}. {{title}}</h3>
+                <div>{{& intro}}</div>
 
-    <hr>
-
-    <!-- Example row of columns -->
-    <div class="row">
-      <div class="span6">
-        <h2>Heading</h2>
-        <p>Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
-      </div>
-      <div class="span5">
-        <h2>Heading</h2>
-         <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
-     </div>
-      <div class="span5">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
+                <div class="content">
+                    <ul>
+                {{#hasNotes}}
+                    <li><a href="/notes/{{urltitle}}">View handout</a></li>
+                {{/hasNotes}}
+                {{#hasAssignment}}
+                        <li><a href="/notes/{{urltitle}}#assignment">View assignment</a></li>
+                {{/hasAssignment}}            
+                    </ul>
+                </div>
+            </div>
+            {{/classNotes}}
+        </section>
+        
+        
       </div>
     </div>
 
     <footer>
-      <p>&copy; Company 2011</p>
+      <p></p>
     </footer>
   </div>
 

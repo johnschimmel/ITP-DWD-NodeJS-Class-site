@@ -5,3 +5,9 @@ ul#schedule li {
 }
 
 ul#schedule li strong { color: #333;}
+
+.classEntry {
+    padding-bottom:8px;
+    margin-bottom:18px;
+    border-bottom: 1px solid #ccc;
+}

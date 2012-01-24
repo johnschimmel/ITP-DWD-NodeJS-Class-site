@@ -77,6 +77,16 @@ app.get('/tehSystem/classnotes/edit/:urltitle', function(request, response) {
             tmpDate = moment(this.classdate).add('minutes',moment().zone());
             return moment(tmpDate).format("YYYY-MM-DD");
         };
+        
+        doc.notesReadyOptions = function() {
+            return [{label:'yes'},{label:'no'}];
+        };
+        /*
+            {label:'Yes',val:'true',selected:(doc.notesReady == "true") ? true : false},
+            {label:'No', val:'false',selected:(doc.notesReady == "false") ? true : false}
+        ];*/
+        console.log(doc);
+        
         response.render("admin/updateEntry.html",{
             
             classnote : doc,

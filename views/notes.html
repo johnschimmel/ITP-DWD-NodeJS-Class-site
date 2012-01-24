@@ -1,0 +1,40 @@
+<div class="content">
+
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="span12">
+
+      {{#note}}
+      <div class="classEntry">
+          <h1>{{title}}</h1>
+          {{& intro}}
+          <hr>
+          <section id="notes">
+              <div class="page-header">
+                  <h1>Notes</h1>
+                <div>
+                <div>
+                    {{& notes}}
+                </div>
+          </section>
+
+          <section id="assignment">
+              <div class="page-header">
+                  <h1>Assignment</h1>
+                <div>
+                <div>
+                    {{& assignment}}
+                </div>
+          </section>
+      </div>
+      {{/note}}
+      
+      
+    </div>
+  </div>
+
+  <footer>
+    <p></p>
+  </footer>
+</div>
+
