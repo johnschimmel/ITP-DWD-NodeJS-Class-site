@@ -1,5 +1,8 @@
 li { color: #404040; }
 
+#subheader p {
+    font-size:20px;
+}
 ul#schedule { margin-left: 0;}
 ul#schedule li { 
     list-style-type: none; 
