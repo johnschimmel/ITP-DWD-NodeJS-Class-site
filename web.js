@@ -34,7 +34,7 @@ app.get("/",function(request, response){
     query.exec({}, function(err,docs){
         for (n in docs) {
             docs[n].hasAssignment = (docs[n].assignment == "") ? false : true;
-            docs[n].hasNotes = ( Boolean(docs[n].notesReady) && docs[n].notes == "") ? false : true;
+            docs[n].hasNotes = ( docs[n].notesReady == "true");
             docs[n].formattedDate = function() {
                 var tmpDate = moment(this.classdate).add('minutes',moment().zone());
                 return moment(tmpDate).format("MMM Do");
@@ -59,7 +59,8 @@ app.get('/notes/:urltitle', function(request, response) {
         
         //mustache function for formatting date
         doc.hasAssignment = (doc.assignment == "") ? false : true;
-        docs[n].hasNotes = ( Boolean(docs[n].notesReady) && docs[n].notes == "") ? false : true;
+        doc.hasNotes = ( doc.notesReady == "true");
+        
         doc.formattedDate = function() {
             var tmpDate = moment(this.classdate).add('minutes',moment().zone());
             return moment(tmpDate).format("MMM Do");
