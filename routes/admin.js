@@ -16,8 +16,6 @@ app.get('/tehSystem', function(request, response) {
             
             docs[n].formattedDate = function() {
                 var tmpDate = moment(this.classdate).add('minutes',moment().zone());
-                console.log(tmpDate);
-                console.log("- - - - - -  -");
                 return moment(tmpDate).format("dddd, MMMM Do YYYY");
             };
             //console.log(docs[n]);
@@ -69,6 +67,7 @@ app.post('/tehSystem/classnotes/entry', function(request, response) {
 
 app.get('/tehSystem/classnotes/edit/:urltitle', function(request, response) {
     moment = app.moment;
+    console.log("got doc");
     
     //get class notes
     ClassNote.findOne({urltitle:request.params.urltitle},function(err,doc){
@@ -78,17 +77,18 @@ app.get('/tehSystem/classnotes/edit/:urltitle', function(request, response) {
             return moment(tmpDate).format("YYYY-MM-DD");
         };
         
-        doc.notesReadyOptions = function() {
-            return [{label:'yes'},{label:'no'}];
-        };
-        /*
-            {label:'Yes',val:'true',selected:(doc.notesReady == "true") ? true : false},
-            {label:'No', val:'false',selected:(doc.notesReady == "false") ? true : false}
-        ];*/
-        console.log(doc);
+        doc.noteListOptions = [
+            {'label':'yes','val':'true','sel' : doc.notesReady == 'true' },
+            {'label':'no','val':'false','sel' : doc.notesReady == 'false' }
+        ];
+        
+        doc.publishedstatusOptions = [
+            {'label':'Draft','val':'draft','sel' : doc.publishedstatus == 'draft' },
+            {'label':'Published','val':'published','sel' : doc.publishedstatus == 'published' }
+        ];
+
         
         response.render("admin/updateEntry.html",{
-            
             classnote : doc,
             layout:'layouts/adminLayout'
         });
@@ -106,7 +106,7 @@ app.post('/tehSystem/classnotes/edit/:urltitle', function(request, response) {
         notes : request.body.entry.notes,
         notesReady : request.body.entry.notesready, 
         assignment : request.body.entry.assignment,
-        publishstatus : request.body.entry.publishstatus != undefined ? request.body.entry.publishstatus : 'draft'
+        publishedstatus : request.body.entry.publishedstatus
     };
     
     ClassNote.update({urltitle:request.params.urltitle},updateData,function(err,doc){

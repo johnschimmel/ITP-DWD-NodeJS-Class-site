@@ -30,7 +30,7 @@ function buildModels(Schema, mongoose) {
         notes       : String,
         notesReady  : String,
         assignment  : String,
-        publishedstatus: String,
+        publishedstatus : String,
         lastupdated : { type: Date, default: Date.now }
     });
     

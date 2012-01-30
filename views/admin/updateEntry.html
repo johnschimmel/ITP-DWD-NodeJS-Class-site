@@ -27,18 +27,14 @@
         </div>
     </div>
 
-    <div id="test">
-        {{#notesReadyOptions}}
-        {{label}}<br>{{val}}<br>{{selected}}
-        {{/notesReadyOptions}}
-        
-    </div>
+
     <div class="clearfix">
         <label for="notes">Notes Ready</label>
         <div class="input">
             <select class="medium" name="entry[notesready]" id="notesready">
-                <option value="false">No</option>
-                <option value="true">Yes</option>
+            {{#classnote.noteListOptions}}
+                <option value="{{val}}" {{#sel}}selected=selected{{/sel}}>{{label}}</option>
+            {{/classnote.noteListOptions}}
             </select>
         </div>
         <label for="notes">Notes</label>
@@ -58,8 +54,9 @@
         <label for="publishedstatus">Published Status</label>
         <div class="input">
             <select class="medium" name="entry[publishedstatus]" id="publishedstatus">
-                <option value="draft">Draft</option>
-                <option value="published">Published</option>
+                {{#classnote.publishedstatusOptions}}
+                    <option value="{{val}}" {{#sel}}selected=selected{{/sel}}>{{label}}</option>
+                {{/classnote.publishedstatusOptions}}
             </select>
         </div>
     </div>
