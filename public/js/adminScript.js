@@ -34,6 +34,8 @@ jQuery(document).ready(function() {
     			{title : 'Table styles'},
     			{title : 'Table row 1', selector : 'tr', classes : 'tablerow1'}
     		],
+    		
+
 
     		// Replace values for the template plugin
     		template_replace_values : {
