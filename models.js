@@ -36,6 +36,13 @@ function buildModels(Schema, mongoose) {
     
     mongoose.model('ClassNote',ClassNote);
 
+    var pageSchema = new Schema({
+        title     : String,
+        body      : String,
+        publishedstatus : String,
+        lastupdated : { type: Date, default: Date.now }
+    });
+    mongoose.model('Page', pageSchema);
     
 }
 
