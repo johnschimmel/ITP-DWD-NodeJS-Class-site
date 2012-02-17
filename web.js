@@ -11,10 +11,7 @@ var app = express.createServer();
 
 app.configure( function(){
     app.moment = moment;
-    //app.db = mongoose.connect('mongodb://heroku_app2392187:tcmrbi5pr5a3pqdp7193jo1035@dbh70.mongolab.com:27707/heroku_app2392187');
-    app.db = mongoose.connect(process.env.MONGOLAB_URI);
-    
-
+    app.db = mongoose.connect(process.env.MONGOLAB_URI); //local dev uses .env file
     app.use(express.bodyParser());
     app.use(express.logger());
     
