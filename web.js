@@ -22,6 +22,7 @@ app.configure( function(){
     app.register('html',adapter.init(hogan)); //use .html files in /views
 
     app.use(express.static(__dirname + '/public'));
+    
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
     
 });
