@@ -21,7 +21,15 @@ function buildModels(Schema, mongoose) {
     });
     
     mongoose.model('BlogPost',BlogPost);
-
+    
+    var assignment = new Schema({
+        name : String,
+        url : String,
+        github : String,
+        date : { type: Date, default: Date.now },
+    });
+    mongoose.model("Assignment", assignment);
+    
     var ClassNote = new Schema({
         classdate   : Date,
         urltitle    : { type: String, lowercase: true, unique: true },
@@ -31,7 +39,8 @@ function buildModels(Schema, mongoose) {
         notesReady  : String,
         assignment  : String,
         publishedstatus : String,
-        lastupdated : { type: Date, default: Date.now }
+        lastupdated : { type: Date, default: Date.now },
+        assignments : [assignment]
     });
     
     mongoose.model('ClassNote',ClassNote);

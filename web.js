@@ -59,10 +59,13 @@ app.get('/notes/:urltitle', function(request, response) {
     ClassNote.findOne({urltitle:request.params.urltitle},function(err,doc){
         console.log("got doc");
         
+        doc.assignments = [];
+        doc.save();
+        
         //mustache function for formatting date
         doc.hasAssignment = (doc.assignment == "") ? false : true;
         doc.hasNotes = ( doc.notesReady == "true");
-        
+
         doc.formattedDate = function() {
             var tmpDate = moment(this.classdate).add('minutes',moment().zone());
             return moment(tmpDate).format("MMM Do");
@@ -79,6 +82,29 @@ app.get('/notes/:urltitle', function(request, response) {
     
 });
 
+app.post('/notes/:urltitle/assignment', function(request, response){
+    ClassNote.findOne({urltitle:request.params.urltitle},function(err,doc){
+        console.log("post assignment");
+        console.log(request.body);
+        
+        
+        //create new assignment post
+        var assignmentData = {
+            name : request.body.name,
+            url : request.body.url,
+            github : request.body.github
+        };
+        
+        assignment = new Assignment(assignmentData);
+        doc.assignments.push(assignment);
+        doc.save();
+        
+        response.redirect("/notes/"+request.params.urltitle);
+    
+    });
+
+});
+
 
 
 require('./models').buildModels(Schema, mongoose);
@@ -86,7 +112,7 @@ require("./boot")(app, mongoose);
 
 //Models
 var ClassNote = mongoose.model('ClassNote');
-
+var Assignment = mongoose.model('Assignment');
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {

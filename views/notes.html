@@ -22,6 +22,39 @@
                 <div>
                     {{& assignment}}
                 </div>
+                
+                <div>
+                    <form class="form-horizontal" method="POST" action="/notes/{{urltitle}}/assignment">
+                        <div class="control-group">
+                            <label class="control-label" for="name">Name</label>
+                            <div class="controls">
+                                <input type="text" class="input-xlarge" name="name" id="name">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="control-group">
+                            <label class="control-label" for="url">Website URL</label>
+                            <div class="controls">
+                                <input type="text" class="input-xlarge" value='http://' name="url" id="url">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="submit" class="btn btn-primary" value="Submit assignment link">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div>
+                    <h3>Submitted student assignments</h3>
+                    <ul>
+                    {{#assignments}}
+                        <li><a href="{{url}}">{{name}}</a></li>
+                    {{/assignments}}
+                    </ul>
+                </div>
           </section>
       </div>
       {{/note}}
