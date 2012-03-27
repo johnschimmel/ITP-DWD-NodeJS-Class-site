@@ -84,9 +84,6 @@ app.get('/notes/:urltitle', function(request, response) {
 
 app.post('/notes/:urltitle/assignment', function(request, response){
     ClassNote.findOne({urltitle:request.params.urltitle},function(err,doc){
-        console.log("post assignment");
-        console.log(request.body);
-        
         
         //create new assignment post
         var assignmentData = {
@@ -96,10 +93,19 @@ app.post('/notes/:urltitle/assignment', function(request, response){
         };
         
         assignment = new Assignment(assignmentData);
-        doc.assignments.push(assignment);
-        doc.save();
         
-        response.redirect("/notes/"+request.params.urltitle);
+        console.log("the assignment");
+        console.log(assignment);
+        console.log("--------------");
+        
+        doc.studentAssignments.push(assignment);
+
+        doc.save( function(err) {
+            console.log("save callback");
+            response.redirect("/notes/"+request.params.urltitle);
+        });
+        
+
     
     });
 

@@ -28,7 +28,7 @@ function buildModels(Schema, mongoose) {
         github : String,
         date : { type: Date, default: Date.now },
     });
-    mongoose.model("Assignment", assignment);
+    
     
     var ClassNote = new Schema({
         classdate   : Date,
@@ -40,9 +40,10 @@ function buildModels(Schema, mongoose) {
         assignment  : String,
         publishedstatus : String,
         lastupdated : { type: Date, default: Date.now },
-        assignments : [assignment]
+        studentAssignments : [assignment]
     });
     
+    mongoose.model("Assignment", assignment);
     mongoose.model('ClassNote',ClassNote);
 
     var pageSchema = new Schema({
