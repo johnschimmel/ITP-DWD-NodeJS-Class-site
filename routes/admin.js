@@ -6,7 +6,7 @@ console.log(mongoose.models);
 console.log("-------------------");
 
 /*************** ADMIN HANDLERS *************************/
-app.get('/tehSystem', function(request, response) {
+app.get('/admin', function(request, response) {
     moment = app.moment;
     var query = ClassNote.find({});
     query.sort('classdate',1);
@@ -32,7 +32,7 @@ app.get('/tehSystem', function(request, response) {
     
 });
 
-app.get('/tehSystem/classnotes/entry', function(request, response) {
+app.get('/admin/classnotes/entry', function(request, response) {
 
     response.render("admin/classNotesEntry.html",{
         publishStatus:function(char) {
@@ -43,7 +43,7 @@ app.get('/tehSystem/classnotes/entry', function(request, response) {
 });
 
 
-app.post('/tehSystem/classnotes/entry', function(request, response) {
+app.post('/admin/classnotes/entry', function(request, response) {
 
     var data = {};
 
@@ -62,10 +62,10 @@ app.post('/tehSystem/classnotes/entry', function(request, response) {
         
     }
 
-    response.redirect("/tehSystem/classnotes/edit/" + newEntry.urltitle);
+    response.redirect("/admin/classnotes/edit/" + newEntry.urltitle);
 });
 
-app.get('/tehSystem/classnotes/edit/:urltitle', function(request, response) {
+app.get('/admin/classnotes/edit/:urltitle', function(request, response) {
     moment = app.moment;
     console.log("got doc");
     
@@ -95,7 +95,7 @@ app.get('/tehSystem/classnotes/edit/:urltitle', function(request, response) {
     });
 });
 
-app.post('/tehSystem/classnotes/edit/:urltitle', function(request, response) {
+app.post('/admin/classnotes/edit/:urltitle', function(request, response) {
     
     //get class notes
     var updateData = {
@@ -115,7 +115,7 @@ app.post('/tehSystem/classnotes/edit/:urltitle', function(request, response) {
             console.log(err);
             console.log("- - - - - - - - - -");
         } else {
-            response.redirect("/tehSystem/classnotes/edit/" + updateData.urltitle);
+            response.redirect("/admin/classnotes/edit/" + updateData.urltitle);
         }
     });
 
